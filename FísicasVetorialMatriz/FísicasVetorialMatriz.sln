@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FísicasVetorialMatriz", "FísicasVetorialMatriz\FísicasVetorialMatriz.csproj", "{A404AFC4-53AA-473D-A1C5-2CD118D9ED58}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A404AFC4-53AA-473D-A1C5-2CD118D9ED58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A404AFC4-53AA-473D-A1C5-2CD118D9ED58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A404AFC4-53AA-473D-A1C5-2CD118D9ED58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A404AFC4-53AA-473D-A1C5-2CD118D9ED58}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEC8EDD0-7B21-4E1A-9E82-9C0E16006A0B}
+	EndGlobalSection
+EndGlobal
