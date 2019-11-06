@@ -29,12 +29,18 @@ namespace FísicasVetorialMatriz
                     //definindo o objeto no espaço
                     a[Massas[i].Posicao[0], Massas[i].Posicao[1]] = Massas[i].formato ;
                     //deslocando o objeto no espaço
-                    if (Massas[i].velocidadeX != 0)
+                    if (Massas[i].Posicao[1] + Massas[i].velocidadeX >= a.GetLength(1) || Massas[i].Posicao[1] + Massas[i].velocidadeX < 0)
+                        Massas[i].velocidadeX = -Massas[i].velocidadeX;
+                    if (Massas[i].Posicao[0] + Massas[i].velocidadeY >= a.GetLength(0) || Massas[i].Posicao[0] + Massas[i].velocidadeY < 0)
+                        Massas[i].velocidadeY = -Massas[i].velocidadeY;
+                    if (Massas[i].velocidadeX != 0 || Massas[i].velocidadeY !=0)
                     {                     
                         Massas[i].Posicao[1] = Massas[i].Posicao[1] + Massas[i].velocidadeX;
+                        Massas[i].Posicao[0] = Massas[i].Posicao[0] + Massas[i].velocidadeY;
                         a[Massas[i].Posicao[0], Massas[i].Posicao[1]] = Massas[i].formato;
-                        a[0 ,Massas[i].Posicao[1] - Massas[i].velocidadeX] =null;
+                        a[Massas[i].Posicao[0] - Massas[i].velocidadeY,Massas[i].Posicao[1] - Massas[i].velocidadeX] =null;
                     }
+                    //Leis Universais                 
                 }
                 //printando a matriz
                 for (int i = 0; i < a.GetLength(0); i++)
@@ -55,7 +61,7 @@ namespace FísicasVetorialMatriz
             {
                 string[,] espacoMundial = new string[20, 30];
                 List<MassaAtuante> massas = new List<MassaAtuante>();
-                MassaAtuante bola = new MassaAtuante("#", 1, 0,new int[] {0,0});
+                MassaAtuante bola = new MassaAtuante("#", 2, 3,new int[] {0,0});
                 massas.Add(bola);
                 while (true)
                     PrintarMatrizBi(espacoMundial, massas);
