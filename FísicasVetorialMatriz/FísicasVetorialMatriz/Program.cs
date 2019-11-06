@@ -10,48 +10,56 @@ namespace FísicasVetorialMatriz
     {
         class MassaAtuante
         {
-     
-            public string formato {get; set;}
-            public int velocidadeX{get; set;}
-            public int velocidadeY{get; set;}
-            public MassaAtuante(string a, int b, int c)
+            public string formato { get; set; }
+            public int velocidadeX { get; set; }
+            public int velocidadeY { get; set; }
+            public int[] Posicao { get; set; }
+            public MassaAtuante(string a, int b, int c,int[] d)    
             {
                 this.formato = a;
                 this.velocidadeX = b;
                 this.velocidadeY = c;
+                this.Posicao = d;
             }
-        }
-        static void PrintarMatrizBi(string[,] a,List<MassaAtuante> Massas)
-        {
-            //atuação das forças
-            for (int i = 0; i < Massas.Count; i++)
+            static void PrintarMatrizBi(string[,] a, List<MassaAtuante> Massas)
             {
-            }
-            //printando a matriz
-            for (int i = 0; i < a.GetLength(0); i++)
-            {
-                Console.WriteLine();
-                for (int j = 0; j <a.GetLength(1); j++)
+                //atuação das forças
+                for (int i = 0; i < Massas.Count; i++)
                 {
-                    if (a[i, j] == null)
-                        a[i, j] = ".";
-                    Console.Write(" {0} ",a[i,j]);
+                    //definindo o objeto no espaço
+                    a[Massas[i].Posicao[0], Massas[i].Posicao[1]] = Massas[i].formato ;
+                    //deslocando o objeto no espaço
+                    if (Massas[i].velocidadeX != 0)
+                    {
+                        a[Massas[i].Posicao[0], Massas[i].Posicao[1]] = Massas[i].formato;
+                        Massas[i].Posicao[1] = Massas[i].Posicao[1] + Massas[i].velocidadeX;
+                    }
                 }
-            }         
-            System.Threading.Thread.Sleep(200);
-            Console.Clear();
+                //printando a matriz
+                for (int i = 0; i < a.GetLength(0); i++)
+                {
+                    Console.WriteLine();
+                    for (int j = 0; j < a.GetLength(1); j++)
+                    {
+                        if (a[i, j] == null)
+                            a[i, j] = ".";
+                        Console.Write(" {0} ", a[i, j]);
+                    }
+                }
+                System.Threading.Thread.Sleep(200);
+                Console.Clear();
+
+            }
+            static void Main(string[] args)
+            {
+                string[,] espacoMundial = new string[20, 30];
+                List<MassaAtuante> massas = new List<MassaAtuante>();
+                MassaAtuante bola = new MassaAtuante("#", 1, 0,new int[] {0,0});
+                massas.Add(bola);
+                while (true)
+                    PrintarMatrizBi(espacoMundial, massas);
+            }
 
         }
-        static void Main(string[] args)
-        {
-            string[,] espacoMundial = new string[20, 30];
-            List<MassaAtuante> massas = new List<MassaAtuante>();
-            MassaAtuante bola = new MassaAtuante("#", 0, 0);            
-            massas.Add(bola);
-            espacoMundial[10,10] = bola.formato;
-            while(true)
-            PrintarMatrizBi(espacoMundial,massas);
-        }
-
     }
 }
