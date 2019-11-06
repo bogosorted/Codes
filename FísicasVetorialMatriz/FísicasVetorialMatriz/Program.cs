@@ -21,7 +21,7 @@ namespace FísicasVetorialMatriz
                 this.velocidadeY = c;
                 this.Posicao = d;
             }
-            static void PrintarMatrizBi(string[,] a, List<MassaAtuante> Massas)
+            static void PrintarMatrizBi(string[,] a, List<MassaAtuante> Massas, ref int frames)
             {
                 //atuação das forças
                 for (int i = 0; i < Massas.Count; i++)
@@ -43,28 +43,62 @@ namespace FísicasVetorialMatriz
                     //Leis Universais                 
                 }
                 //printando a matriz
+                Console.WriteLine(" 1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  27  28  29 30");
                 for (int i = 0; i < a.GetLength(0); i++)
                 {
                     Console.WriteLine();
+                    if (i + 1 >=10)
+                    Console.Write(i +1 +" ");
+                    else
+                    {
+                        Console.Write(i + 1 +"  ");
+                    }
                     for (int j = 0; j < a.GetLength(1); j++)
                     {
+                       
                         if (a[i, j] == null)
                             a[i, j] = ".";
+                        //cannot use switch
+                        else {
+                            switch (a[i, j]) {
+                                case "#":
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    break;
+                                case "@":
+                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                    break;
+                                case "+":
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    break;
+                            }                       
+                        }
                         Console.Write(" {0} ", a[i, j]);
+                        Console.ForegroundColor = ConsoleColor.Gray;
                     }
+                    
                 }
-                System.Threading.Thread.Sleep(100);
+                frames++;
+                Console.WriteLine("\t\t\t\t\t\t\t\t frames " + frames);
+                System.Threading.Thread.Sleep(500);
                 Console.Clear();
 
             }
             static void Main(string[] args)
             {
+                int frames = 0;
                 string[,] espacoMundial = new string[20, 30];
                 List<MassaAtuante> massas = new List<MassaAtuante>();
-                MassaAtuante bola = new MassaAtuante("#", 2, 3,new int[] {0,0});
+                MassaAtuante bola = new MassaAtuante("#", 1, 1,new int[] {0,0});
+                MassaAtuante Pedra = new MassaAtuante("@", 2, 3, new int[] { 5, 5 });
+                MassaAtuante poeira = new MassaAtuante("+", 4, 1, new int[] { 4, 5 });
+            
                 massas.Add(bola);
+                massas.Add(Pedra);
+             //   massas.Add(triangulo);
+                massas.Add(poeira);
+              //  massas.Add(seila);
                 while (true)
-                    PrintarMatrizBi(espacoMundial, massas);
+                    PrintarMatrizBi(espacoMundial, massas,ref frames);
             }
 
         }
