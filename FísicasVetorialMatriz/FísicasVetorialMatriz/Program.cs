@@ -30,9 +30,10 @@ namespace FísicasVetorialMatriz
                     a[Massas[i].Posicao[0], Massas[i].Posicao[1]] = Massas[i].formato ;
                     //deslocando o objeto no espaço
                     if (Massas[i].velocidadeX != 0)
-                    {
-                        a[Massas[i].Posicao[0], Massas[i].Posicao[1]] = Massas[i].formato;
+                    {                     
                         Massas[i].Posicao[1] = Massas[i].Posicao[1] + Massas[i].velocidadeX;
+                        a[Massas[i].Posicao[0], Massas[i].Posicao[1]] = Massas[i].formato;
+                        a[0 ,Massas[i].Posicao[1] - Massas[i].velocidadeX] =null;
                     }
                 }
                 //printando a matriz
@@ -46,7 +47,7 @@ namespace FísicasVetorialMatriz
                         Console.Write(" {0} ", a[i, j]);
                     }
                 }
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(100);
                 Console.Clear();
 
             }
