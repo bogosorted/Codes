@@ -20,9 +20,9 @@ namespace card
             public class Card : Deck
             {
                 float id, angulacaoMaxZ;
-                public int ataque {get; set;}
-                public int vida {get; set;}
-                public string nome {get; set;}
+                public int Ataque {get; set;}
+                public int Vida {get; set;}
+                public string Nome {get; set;}
                 
                 public Card(float id, Deck a)
                 {
@@ -31,9 +31,9 @@ namespace card
                     switch (id)
                     {
                         case 0:
-                            this.nome = "Trovador";
-                            this.ataque = 15;
-                            this.vida = 13;
+                            this.Nome = "Trovador";
+                            this.Ataque = 15;
+                            this.Vida = 13;
                             break;
                     }
                 }
@@ -42,12 +42,10 @@ namespace card
             {
                 Deck primeiro = new Deck();
                 Card trova = new Card(0,primeiro);
-                System.Console.WriteLine(primeiro.GetTamanhoBaralho());
                 Deck segundo = new Deck();
                 Card b = new Card(0, segundo);
                 Card o = new Card(0, segundo);
-                System.Console.WriteLine(segundo.GetTamanhoBaralho());
-                System.Console.WriteLine("ataque : " + segundo.mao[0].ataque);
+               
             }
         }
     }
