@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace ConsoleApplication43
 {
     class Program
     {
+
         #region Originator
         class File
         {
@@ -15,11 +14,12 @@ namespace ConsoleApplication43
             private string _nomeArquivo;
             private string _textoArquivo;
             private string _diretorio;
-
+            #region Propiedades
             public string NomeArquivo
             {
                 get { return _nomeArquivo; }
-                set {
+                set
+                {
                     this._nomeArquivo = value;
                     this._dataModificacao = DateTime.Now;
                 }
@@ -27,7 +27,8 @@ namespace ConsoleApplication43
             public string Diretorio
             {
                 get { return _diretorio; }
-                set {
+                set
+                {
                     this._diretorio = value;
                     this._dataModificacao = DateTime.Now;
                 }
@@ -41,6 +42,7 @@ namespace ConsoleApplication43
                     this._dataModificacao = DateTime.Now;
                 }
             }
+            #endregion
             public Commits SalvarCommits()
             {
                 Console.WriteLine("Salvando versão...");
@@ -48,6 +50,7 @@ namespace ConsoleApplication43
             }
             public void VoltarCommits(Commits a)
             {
+
                 Console.WriteLine("Regredindo versão...");
                 this._nomeArquivo = a.NomeArquivo;
                 this._diretorio = a.Diretorio;
@@ -55,10 +58,11 @@ namespace ConsoleApplication43
             }
             public void ExibirInfo()
             {
-                Console.WriteLine( "Data de modificação: {0}",_dataModificacao);
-                //Console.WriteLine( "Nome do arquivo")
+                Console.WriteLine("__________________________________\n");
+                Console.WriteLine("Data de modificação: {0} \nDiretório do arquivo : {1} \nNome do arquivo : {2} \nTexto do arquivo : {3} ", _dataModificacao, _diretorio, _nomeArquivo, _textoArquivo);
+                Console.WriteLine("__________________________________\n");
             }
-            
+
         }
         #endregion
         #region Memento
@@ -76,6 +80,7 @@ namespace ConsoleApplication43
                 this._textoArquivo = c;
                 this._diretorio = d;
             }
+            #region Propiedades
             public string NomeArquivo
             {
                 get { return _nomeArquivo; }
@@ -89,6 +94,7 @@ namespace ConsoleApplication43
                 get { return _textoArquivo; }
 
             }
+            #endregion
 
         }
         #endregion
@@ -97,28 +103,47 @@ namespace ConsoleApplication43
         {
             private Stack<Commits> _mementos = new Stack<Commits>();
             public Commits CareTaker
-            { get{ return _mementos.Pop(); }
-              set {_mementos.Push(value); } }
+            {
+                get { return _mementos.Pop(); }
+                set { _mementos.Push(value); }
+            }
         }
         #endregion
 
 
         static void Main(string[] args)
         {
+            Console.Title = "GitBash";
+
             File a = new File();
-            a.Diretorio = @"c";
+            Github b = new Github();
+            //vs 1
+            a.Diretorio = @"C:\Users\aluno\Object3D";
             a.NomeArquivo = "Musicas";
             a.Texto = "Eu curto rock balboa";
-          
-            Github b = new Github();
-            b.CareTaker = a.SalvarCommits();
 
+            a.ExibirInfo();
+            //salvando vs 1
+            b.CareTaker = a.SalvarCommits();
+            //vs 2
             a.Diretorio = @"C:\Users\aluno\Object3D";
             a.NomeArquivo = "Maçã";
             a.Texto = "Maçã verde, cultivada em 1987 e mumificada pelo própio Isaaac Newton";
 
+            a.ExibirInfo();
+            //salvando vs 2
             b.CareTaker = a.SalvarCommits();
-
+            //vs 3
+            a.Diretorio = @"C:\Users\aluno\JogoPi";
+            a.NomeArquivo = "Rodavort";
+            a.Texto = "O melhor jogo do mundo?";
+            a.ExibirInfo();
+            //regredindo para vs 2
+            a.VoltarCommits(b.CareTaker);
+            a.ExibirInfo();
+            //regredindo para vs 1
+            a.VoltarCommits(b.CareTaker);
+            a.ExibirInfo();
         }
     }
 }
